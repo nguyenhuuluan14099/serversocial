@@ -11,7 +11,7 @@ require("dotenv/config");
 app.get("/", (req, res) => {
   res.send("we are go home");
 });
-
+const port = process.env.PORT || 5000;
 //import router
 const routerUser = require("./routes/user");
 const routerConversation = require("./routes/conversations");
@@ -31,4 +31,4 @@ mongoose
   .then(() => console.log("Connect database "))
   .catch((err) => console.log(err));
 
-app.listen(5000, () => console.log("server is running with port 5000"));
+app.listen(port, () => console.log(`server is running with port ${port}`));
