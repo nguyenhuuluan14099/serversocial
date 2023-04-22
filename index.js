@@ -29,6 +29,15 @@ app.use("/messages", routerMessage);
 app.use("/posts", routerPost);
 app.use("/comments", routerComment);
 app.use("/notifications", routerNotification);
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://serversocial.vercel.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 mongoose
   .connect(process.env.DB_CONNECT)
   .then(() => console.log("Connect database "))
