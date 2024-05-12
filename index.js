@@ -20,7 +20,7 @@ app.use(cookieParser());
 require("dotenv").config();
 
 app.get("/", (req, res) => {
-  res.json({ msg: "hello" });
+  res.json({ msg: "hello server" });
 });
 
 const port = process.env.PORT || 5000;
