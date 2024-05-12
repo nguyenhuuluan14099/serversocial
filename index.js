@@ -22,6 +22,7 @@ require("dotenv").config();
 app.get("/", (req, res) => {
   res.json({ msg: "hello server" });
 });
+<<<<<<< HEAD
 
 const port = process.env.PORT || 5000;
 
@@ -36,6 +37,26 @@ app.use("/api", require("./routes/postRoute"));
 app.use("/api", require("./routes/commentRoute"));
 app.use("/api", require("./routes/notifyRoute"));
 app.use("/api", require("./routes/messageRoute"));
+=======
+
+
+
+const port = process.env.PORT || 5000;
+//import router
+const routerUser = require("./routes/user");
+const routerConversation = require("./routes/conversations");
+const routerMessage = require("./routes/message");
+const routerPost = require("./routes/posts");
+const routerComment = require("./routes/comment");
+const routerNotification = require("./routes/notifications");
+app.use("/users", routerUser);
+
+app.use("/conversations", routerConversation);
+app.use("/messages", routerMessage);
+app.use("/posts", routerPost);
+app.use("/comments", routerComment);
+app.use("/notifications", routerNotification);
+>>>>>>> e222621fc892eebafa323bd9065cb63666fa4a4d
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
