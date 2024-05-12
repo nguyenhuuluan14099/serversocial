@@ -2,37 +2,56 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
+    fullname: {
+      type: String,
+      require: true,
+      trim: true,
+      maxlength: 25,
+    },
     username: {
       type: String,
       require: true,
       unique: true,
+      trim: true,
+      maxlength: 25,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
     password: {
       type: String,
       required: true,
     },
     profilePicture: {
-      type: Object,
-      default: "https://i.ibb.co/1dSwFqY/download-1.png",
+      type: Array,
+      default: [
+        {
+          imageUrl: "https://i.ibb.co/1dSwFqY/download-1.png",
+          imageId: "09327837823",
+          imageThumb: "https://i.ibb.co/1dSwFqY/download-1.png",
+        },
+      ],
     },
     coverPicture: {
       type: Object,
-      default: "https://i.ibb.co/1dSwFqY/download-1.png",
+      default: [
+        {
+          imageUrl: "https://i.ibb.co/1dSwFqY/download-1.png",
+          imageId: "09327837823",
+          imageThumb: "https://i.ibb.co/1dSwFqY/download-1.png",
+        },
+      ],
     },
-    followers: {
-      type: Array,
-      default: [],
-    },
-    followings: {
-      type: Array,
-      default: [],
-    },
+    followers: [{ type: mongoose.Types.ObjectId, ref: "user" }],
+    followings: [{ type: mongoose.Types.ObjectId, ref: "user" }],
     isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    isBlock: {
       type: Boolean,
       default: false,
     },
@@ -44,10 +63,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       max: 50,
     },
-    saved: {
-      type: Array,
-      default: [],
-    },
+    saved: [{ type: mongoose.Types.ObjectId, ref: "user" }],
     relationship: {
       type: Number,
       enum: [1, 2, 3],
@@ -56,4 +72,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model("user", UserSchema);

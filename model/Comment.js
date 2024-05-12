@@ -2,29 +2,32 @@ const mongoose = require("mongoose");
 
 const Comment = mongoose.Schema(
   {
-    user: {
-      type: Object,
-    },
+    user: { type: mongoose.Types.ObjectId, ref: "user" },
 
     content: {
       type: String,
       require: true,
     },
-    like: {
+    like: [{ type: mongoose.Types.ObjectId, ref: "user" }],
+    reply: {
       type: Array,
       default: [],
     },
-    reply: {
+
+    createdAt: {
       type: String,
       default: "",
     },
-    friendName: {
-      type: String,
-      default: "",
+    tag: {
+      type: Object,
+    },
+    reply: {
+      type: Array,
+      default: [],
     },
   },
   {
     timestamps: true,
   }
 );
-module.exports = mongoose.model("Comment", Comment);
+module.exports = mongoose.model("comment", Comment);
